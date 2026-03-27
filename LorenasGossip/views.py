@@ -2,6 +2,10 @@
 Views for the LorenasGossip application.
 Handles authentication, articles, newsletters,
 publisher profiles, and team management.
+
+All views use Django's login_required decorator.
+Role-based access is enforced via custom decorators
+defined in decorators.py.
 """
 
 import logging
