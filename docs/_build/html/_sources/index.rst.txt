@@ -2,15 +2,9 @@ Welcome to LorenaNewsApp's documentation!
 ==========================================
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+   :maxdepth: 3
+   :caption: Navigation
 
-.. automodule:: LorenasGossip.models
-   :members:
-
-.. automodule:: LorenasGossip.views
-   :members:
-
-.. automodule:: LorenasGossip.forms
-   :members:
-
+   models
+   views
+   forms
