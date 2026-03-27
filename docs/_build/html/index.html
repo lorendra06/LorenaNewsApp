@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Welcome to LorenaNewsApp’s documentation! &#8212; LorenaNewsApp 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=f2a433a1"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="welcome-to-lorenanewsapp-s-documentation">
+<h1>Welcome to LorenaNewsApp’s documentation!<a class="headerlink" href="#welcome-to-lorenanewsapp-s-documentation" title="Link to this heading">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<p id="module-LorenasGossip.models">Database models for the LorenasGossip application.
+Defines CustomUser, Article, and Newsletter.
+Publisher is a CustomUser with role=’publisher’.</p>
+<dl class="simple">
+<dt>Modules:</dt><dd><ul class="simple">
+<li><p>CustomUser: Extended user model with role-based access.</p></li>
+<li><p>Article: News article written by a journalist.</p></li>
+<li><p>Newsletter: Curated collection of approved articles.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="LorenasGossip.models.Article">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">LorenasGossip.models.</span></span><span class="sig-name descname"><span class="pre">Article</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LorenasGossip.models.Article" title="Link to this definition">¶</a></dt>
+<dd><p>A news article written by a journalist.
+Can be independent or published under a publisher.
+The publisher field links to a CustomUser with role=’publisher’.</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="LorenasGossip.models.Article.DoesNotExist">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#LorenasGossip.models.Article.DoesNotExist" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="LorenasGossip.models.Article.MultipleObjectsReturned">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#LorenasGossip.models.Article.MultipleObjectsReturned" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="LorenasGossip.models.Article.NotUpdated">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">NotUpdated</span></span><a class="headerlink" href="#LorenasGossip.models.Article.NotUpdated" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="LorenasGossip.models.CustomUser">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">LorenasGossip.models.</span></span><span class="sig-name descname"><span class="pre">CustomUser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LorenasGossip.models.CustomUser" title="Link to this definition">¶</a></dt>
+<dd><p>Extended user model with role-based fields.</p>
+<p>Roles: reader, journalist, editor, publisher.</p>
+<p>Readers can view articles and subscribe to journalists/publishers.
+Journalists can write articles and newsletters.
+Editors can approve and delete articles.
+Publishers manage a team of journalists and editors.</p>
+<p>Reader fields (subscriptions) are cleared for non-readers.
+Journalist/Editor fields are cleared for non-journalists/editors.</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="LorenasGossip.models.CustomUser.DoesNotExist">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#LorenasGossip.models.CustomUser.DoesNotExist" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="LorenasGossip.models.CustomUser.MultipleObjectsReturned">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#LorenasGossip.models.CustomUser.MultipleObjectsReturned" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="LorenasGossip.models.CustomUser.NotUpdated">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">NotUpdated</span></span><a class="headerlink" href="#LorenasGossip.models.CustomUser.NotUpdated" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LorenasGossip.models.CustomUser.get_publishers">
+<span class="sig-name descname"><span class="pre">get_publishers</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#LorenasGossip.models.CustomUser.get_publishers" title="Link to this definition">¶</a></dt>
+<dd><p>Return all publishers this journalist/editor belongs to.
+Works via reverse relation from publisher’s team fields.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="LorenasGossip.models.CustomUser.is_editor">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">is_editor</span></span><a class="headerlink" href="#LorenasGossip.models.CustomUser.is_editor" title="Link to this definition">¶</a></dt>
+<dd><p>Return True if user is an editor.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="LorenasGossip.models.CustomUser.is_journalist">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">is_journalist</span></span><a class="headerlink" href="#LorenasGossip.models.CustomUser.is_journalist" title="Link to this definition">¶</a></dt>
+<dd><p>Return True if user is a journalist.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="LorenasGossip.models.CustomUser.is_publisher">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">is_publisher</span></span><a class="headerlink" href="#LorenasGossip.models.CustomUser.is_publisher" title="Link to this definition">¶</a></dt>
+<dd><p>Return True if user is a publisher.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="LorenasGossip.models.CustomUser.is_reader">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">is_reader</span></span><a class="headerlink" href="#LorenasGossip.models.CustomUser.is_reader" title="Link to this definition">¶</a></dt>
+<dd><p>Return True if user is a reader.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LorenasGossip.models.CustomUser.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LorenasGossip.models.CustomUser.save" title="Link to this definition">¶</a></dt>
+<dd><p>Auto-assign user to the correct group on save.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="LorenasGossip.models.Newsletter">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">LorenasGossip.models.</span></span><span class="sig-name descname"><span class="pre">Newsletter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LorenasGossip.models.Newsletter" title="Link to this definition">¶</a></dt>
+<dd><p>A curated collection of articles created by a journalist.</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="LorenasGossip.models.Newsletter.DoesNotExist">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#LorenasGossip.models.Newsletter.DoesNotExist" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="LorenasGossip.models.Newsletter.MultipleObjectsReturned">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#LorenasGossip.models.Newsletter.MultipleObjectsReturned" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="LorenasGossip.models.Newsletter.NotUpdated">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">NotUpdated</span></span><a class="headerlink" href="#LorenasGossip.models.Newsletter.NotUpdated" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<p id="module-LorenasGossip.views">Views for the LorenasGossip application.
+Handles authentication, articles, newsletters,
+publisher profiles, and team management.</p>
+<p>All views use Django’s login_required decorator.
+Role-based access is enforced via custom decorators
+defined in decorators.py.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="LorenasGossip.views.approve_article">
+<span class="sig-prename descclassname"><span class="pre">LorenasGossip.views.</span></span><span class="sig-name descname"><span class="pre">approve_article</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pk</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LorenasGossip.views.approve_article" title="Link to this definition">¶</a></dt>
+<dd><p>Approve an article (editors only).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="LorenasGossip.views.article_create">
+<span class="sig-prename descclassname"><span class="pre">LorenasGossip.views.</span></span><span class="sig-name descname"><span class="pre">article_create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LorenasGossip.views.article_create" title="Link to this definition">¶</a></dt>
+<dd><p>Create a new article (journalists only).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="LorenasGossip.views.article_delete">
+<span class="sig-prename descclassname"><span class="pre">LorenasGossip.views.</span></span><span class="sig-name descname"><span class="pre">article_delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pk</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LorenasGossip.views.article_delete" title="Link to this definition">¶</a></dt>
+<dd><p>Delete an article (editors and journalists).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="LorenasGossip.views.article_detail">
+<span class="sig-prename descclassname"><span class="pre">LorenasGossip.views.</span></span><span class="sig-name descname"><span class="pre">article_detail</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pk</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LorenasGossip.views.article_detail" title="Link to this definition">¶</a></dt>
+<dd><p>Display a single article.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="LorenasGossip.views.article_edit">
+<span class="sig-prename descclassname"><span class="pre">LorenasGossip.views.</span></span><span class="sig-name descname"><span class="pre">article_edit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pk</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LorenasGossip.views.article_edit" title="Link to this definition">¶</a></dt>
+<dd><p>Edit an existing article (editors and journalists).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="LorenasGossip.views.article_list">
+<span class="sig-prename descclassname"><span class="pre">LorenasGossip.views.</span></span><span class="sig-name descname"><span class="pre">article_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LorenasGossip.views.article_list" title="Link to this definition">¶</a></dt>
+<dd><p>Display all approved articles.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="LorenasGossip.views.join_publisher">
+<span class="sig-prename descclassname"><span class="pre">LorenasGossip.views.</span></span><span class="sig-name descname"><span class="pre">join_publisher</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pk</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LorenasGossip.views.join_publisher" title="Link to this definition">¶</a></dt>
+<dd><p>Journalist or editor requests to join a publisher’s team.
+Publisher can remove them from the team via publisher_team view.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="LorenasGossip.views.leave_publisher">
+<span class="sig-prename descclassname"><span class="pre">LorenasGossip.views.</span></span><span class="sig-name descname"><span class="pre">leave_publisher</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pk</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LorenasGossip.views.leave_publisher" title="Link to this definition">¶</a></dt>
+<dd><p>Journalist or editor leaves a publisher’s team.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="LorenasGossip.views.login_view">
+<span class="sig-prename descclassname"><span class="pre">LorenasGossip.views.</span></span><span class="sig-name descname"><span class="pre">login_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LorenasGossip.views.login_view" title="Link to this definition">¶</a></dt>
+<dd><p>Login an existing user.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="LorenasGossip.views.logout_view">
+<span class="sig-prename descclassname"><span class="pre">LorenasGossip.views.</span></span><span class="sig-name descname"><span class="pre">logout_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LorenasGossip.views.logout_view" title="Link to this definition">¶</a></dt>
+<dd><p>Logout the current user.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="LorenasGossip.views.newsletter_create">
+<span class="sig-prename descclassname"><span class="pre">LorenasGossip.views.</span></span><span class="sig-name descname"><span class="pre">newsletter_create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LorenasGossip.views.newsletter_create" title="Link to this definition">¶</a></dt>
+<dd><p>Create a new newsletter (journalists only).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="LorenasGossip.views.newsletter_delete">
+<span class="sig-prename descclassname"><span class="pre">LorenasGossip.views.</span></span><span class="sig-name descname"><span class="pre">newsletter_delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pk</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LorenasGossip.views.newsletter_delete" title="Link to this definition">¶</a></dt>
+<dd><p>Delete a newsletter (editors and journalists).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="LorenasGossip.views.newsletter_detail">
+<span class="sig-prename descclassname"><span class="pre">LorenasGossip.views.</span></span><span class="sig-name descname"><span class="pre">newsletter_detail</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pk</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LorenasGossip.views.newsletter_detail" title="Link to this definition">¶</a></dt>
+<dd><p>Display a single newsletter.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="LorenasGossip.views.newsletter_edit">
+<span class="sig-prename descclassname"><span class="pre">LorenasGossip.views.</span></span><span class="sig-name descname"><span class="pre">newsletter_edit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pk</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LorenasGossip.views.newsletter_edit" title="Link to this definition">¶</a></dt>
+<dd><p>Edit a newsletter (editors and journalists).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="LorenasGossip.views.newsletter_list">
+<span class="sig-prename descclassname"><span class="pre">LorenasGossip.views.</span></span><span class="sig-name descname"><span class="pre">newsletter_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LorenasGossip.views.newsletter_list" title="Link to this definition">¶</a></dt>
+<dd><p>Display all newsletters.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="LorenasGossip.views.pending_articles">
+<span class="sig-prename descclassname"><span class="pre">LorenasGossip.views.</span></span><span class="sig-name descname"><span class="pre">pending_articles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LorenasGossip.views.pending_articles" title="Link to this definition">¶</a></dt>
+<dd><p>List all articles pending approval (editors only).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="LorenasGossip.views.publisher_detail">
+<span class="sig-prename descclassname"><span class="pre">LorenasGossip.views.</span></span><span class="sig-name descname"><span class="pre">publisher_detail</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pk</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LorenasGossip.views.publisher_detail" title="Link to this definition">¶</a></dt>
+<dd><p>Display a publisher’s profile, team, and articles.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="LorenasGossip.views.publisher_list">
+<span class="sig-prename descclassname"><span class="pre">LorenasGossip.views.</span></span><span class="sig-name descname"><span class="pre">publisher_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LorenasGossip.views.publisher_list" title="Link to this definition">¶</a></dt>
+<dd><p>Display all publishers.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="LorenasGossip.views.publisher_team">
+<span class="sig-prename descclassname"><span class="pre">LorenasGossip.views.</span></span><span class="sig-name descname"><span class="pre">publisher_team</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pk</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LorenasGossip.views.publisher_team" title="Link to this definition">¶</a></dt>
+<dd><p>Publisher manages their team of journalists and editors.
+Only the publisher themselves can access this page.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="LorenasGossip.views.register_view">
+<span class="sig-prename descclassname"><span class="pre">LorenasGossip.views.</span></span><span class="sig-name descname"><span class="pre">register_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LorenasGossip.views.register_view" title="Link to this definition">¶</a></dt>
+<dd><p>Register a new user and assign them to the correct group.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="LorenasGossip.views.username_recovery">
+<span class="sig-prename descclassname"><span class="pre">LorenasGossip.views.</span></span><span class="sig-name descname"><span class="pre">username_recovery</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LorenasGossip.views.username_recovery" title="Link to this definition">¶</a></dt>
+<dd><p>Allow users to recover their username via email.
+Displays the username associated with the provided email.</p>
+</dd></dl>
+
+<p id="module-LorenasGossip.forms">Forms for the LorenasGossip application.
+Handles registration, article/newsletter creation,
+and publisher team management.</p>
+<p>All forms include custom validation methods (clean_*)
+to enforce business rules before saving to the database.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="LorenasGossip.forms.ArticleForm">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">LorenasGossip.forms.</span></span><span class="sig-name descname"><span class="pre">ArticleForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LorenasGossip.forms.ArticleForm" title="Link to this definition">¶</a></dt>
+<dd><p>Form for creating and editing articles with validation.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="LorenasGossip.forms.ArticleForm.Meta">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#LorenasGossip.forms.ArticleForm.Meta" title="Link to this definition">¶</a></dt>
+<dd><p>Meta options for ArticleForm.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="LorenasGossip.forms.ArticleForm.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#LorenasGossip.forms.ArticleForm.Meta.model" title="Link to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#LorenasGossip.models.Article" title="LorenasGossip.models.Article"><code class="xref py py-class docutils literal notranslate"><span class="pre">Article</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LorenasGossip.forms.ArticleForm.clean_content">
+<span class="sig-name descname"><span class="pre">clean_content</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#LorenasGossip.forms.ArticleForm.clean_content" title="Link to this definition">¶</a></dt>
+<dd><p>Validate article content length.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LorenasGossip.forms.ArticleForm.clean_title">
+<span class="sig-name descname"><span class="pre">clean_title</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#LorenasGossip.forms.ArticleForm.clean_title" title="Link to this definition">¶</a></dt>
+<dd><p>Validate article title length.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="LorenasGossip.forms.ArticleForm.media">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#LorenasGossip.forms.ArticleForm.media" title="Link to this definition">¶</a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="LorenasGossip.forms.NewsletterForm">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">LorenasGossip.forms.</span></span><span class="sig-name descname"><span class="pre">NewsletterForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'id_%s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;class</span> <span class="pre">'django.forms.utils.ErrorList'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_suffix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_permitted</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_required_attribute</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renderer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LorenasGossip.forms.NewsletterForm" title="Link to this definition">¶</a></dt>
+<dd><p>Form for creating and editing newsletters with validation.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="LorenasGossip.forms.NewsletterForm.Meta">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#LorenasGossip.forms.NewsletterForm.Meta" title="Link to this definition">¶</a></dt>
+<dd><p>Meta options for NewsletterForm.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="LorenasGossip.forms.NewsletterForm.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#LorenasGossip.forms.NewsletterForm.Meta.model" title="Link to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#LorenasGossip.models.Newsletter" title="LorenasGossip.models.Newsletter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Newsletter</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LorenasGossip.forms.NewsletterForm.clean_articles">
+<span class="sig-name descname"><span class="pre">clean_articles</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#LorenasGossip.forms.NewsletterForm.clean_articles" title="Link to this definition">¶</a></dt>
+<dd><p>Validate that only approved articles are included.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LorenasGossip.forms.NewsletterForm.clean_title">
+<span class="sig-name descname"><span class="pre">clean_title</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#LorenasGossip.forms.NewsletterForm.clean_title" title="Link to this definition">¶</a></dt>
+<dd><p>Validate newsletter title length.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="LorenasGossip.forms.NewsletterForm.media">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#LorenasGossip.forms.NewsletterForm.media" title="Link to this definition">¶</a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="LorenasGossip.forms.PublisherTeamForm">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">LorenasGossip.forms.</span></span><span class="sig-name descname"><span class="pre">PublisherTeamForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'id_%s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;class</span> <span class="pre">'django.forms.utils.ErrorList'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_suffix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_permitted</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_required_attribute</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renderer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LorenasGossip.forms.PublisherTeamForm" title="Link to this definition">¶</a></dt>
+<dd><p>Form for publishers to manage their team.
+Allows selecting journalists and editors.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="LorenasGossip.forms.PublisherTeamForm.Meta">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#LorenasGossip.forms.PublisherTeamForm.Meta" title="Link to this definition">¶</a></dt>
+<dd><p>Meta options for PublisherTeamForm.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="LorenasGossip.forms.PublisherTeamForm.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#LorenasGossip.forms.PublisherTeamForm.Meta.model" title="Link to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#LorenasGossip.models.CustomUser" title="LorenasGossip.models.CustomUser"><code class="xref py py-class docutils literal notranslate"><span class="pre">CustomUser</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="LorenasGossip.forms.PublisherTeamForm.media">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#LorenasGossip.forms.PublisherTeamForm.media" title="Link to this definition">¶</a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="LorenasGossip.forms.RegisterForm">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">LorenasGossip.forms.</span></span><span class="sig-name descname"><span class="pre">RegisterForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LorenasGossip.forms.RegisterForm" title="Link to this definition">¶</a></dt>
+<dd><p>Registration form with role selection and validation.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="LorenasGossip.forms.RegisterForm.Meta">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#LorenasGossip.forms.RegisterForm.Meta" title="Link to this definition">¶</a></dt>
+<dd><p>Meta options for RegisterForm.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="LorenasGossip.forms.RegisterForm.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#LorenasGossip.forms.RegisterForm.Meta.model" title="Link to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#LorenasGossip.models.CustomUser" title="LorenasGossip.models.CustomUser"><code class="xref py py-class docutils literal notranslate"><span class="pre">CustomUser</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LorenasGossip.forms.RegisterForm.clean_email">
+<span class="sig-name descname"><span class="pre">clean_email</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#LorenasGossip.forms.RegisterForm.clean_email" title="Link to this definition">¶</a></dt>
+<dd><p>Validate that email is not already in use.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LorenasGossip.forms.RegisterForm.clean_role">
+<span class="sig-name descname"><span class="pre">clean_role</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#LorenasGossip.forms.RegisterForm.clean_role" title="Link to this definition">¶</a></dt>
+<dd><p>Validate that the selected role is valid.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LorenasGossip.forms.RegisterForm.clean_username">
+<span class="sig-name descname"><span class="pre">clean_username</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#LorenasGossip.forms.RegisterForm.clean_username" title="Link to this definition">¶</a></dt>
+<dd><p>Validate that username is long enough.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="LorenasGossip.forms.RegisterForm.media">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#LorenasGossip.forms.RegisterForm.media" title="Link to this definition">¶</a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LorenasGossip.forms.RegisterForm.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">commit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LorenasGossip.forms.RegisterForm.save" title="Link to this definition">¶</a></dt>
+<dd><p>Save user and trigger group assignment.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">LorenaNewsApp</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2026, Loredana Draghin.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
