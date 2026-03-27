@@ -7,18 +7,18 @@ subscriptions, and automated email notifications.
 
 ---
 
-## 🚀 Installation
+## 🚀 Running with venv
 
 ### Prerequisites
-- Python 3.10+
-- MariaDB 12+
+- Python 3.12+
+- MariaDB 10.11+
 - pip
 
 ### Steps
 
 **1. Clone the repository**
 ```bash
-git clone https://github.com/your-username/LorenaNewsApp.git
+git clone https://github.com/lorendra06/LorenaNewsApp.git
 cd LorenaNewsApp
 ```
 
@@ -45,10 +45,14 @@ DB_NAME=lorena_news_db
 DB_USER=your_db_user
 DB_PASSWORD=your_db_password
 DB_HOST=localhost
-DB_PORT=your_db_port
+DB_PORT=3306
 SECRET_KEY=your-secret-key
 DEBUG=True
 ```
+
+> ⚠️ Never commit your `.env` file to the repository.
+> Use `.env.example` as a reference for the required variables.
+> The reviewer will provide a `credentials.txt` file with the actual values.
 
 **5. Create the database** in MariaDB:
 ```sql
@@ -83,36 +87,53 @@ The application will be available at `http://127.0.0.1:8000/`
 ## 🐳 Running with Docker
 
 ### Prerequisites
-- Docker installed on your machine
+- Docker and Docker Compose installed on your machine
 
-### Steps
+### Option A — Using Docker Hub image (recommended)
 
-**1. Create `.env` file** in the root directory (same as above):
+**1. Create `.env` file** in the root directory:
 ```
 DB_ENGINE=django.db.backends.mysql
 DB_NAME=lorena_news_db
 DB_USER=your_db_user
 DB_PASSWORD=your_db_password
-DB_HOST=your_db_host
-DB_PORT=your_db_port
+DB_HOST=db
+DB_PORT=3306
 SECRET_KEY=your-secret-key
 DEBUG=True
 ```
 
-> ⚠️ Never commit your `.env` file to the repository.
-> Use `.env.example` as a reference for the required variables.
+> ⚠️ Note: `DB_HOST` must be `db` (not `localhost`) when running with Docker.
+> Never commit your `.env` file to the repository.
+> The reviewer will provide a `credentials.txt` file with the actual values.
 
-**2. Build the Docker image**
+**2. Pull the image from Docker Hub**
 ```bash
-docker build -t lorenanewsapp .
+docker pull lorendra/lorenanewsapp:latest
 ```
 
-**3. Run the container**
+**3. Start the application with Docker Compose**
 ```bash
-docker run -p 8000:8000 --env-file .env lorenanewsapp
+docker-compose up
 ```
 
 The application will be available at `http://localhost:8000/`
+
+---
+
+### Option B — Build locally
+
+**1. Create `.env` file** (same as above)
+
+**2. Build the image**
+```bash
+docker build -t lorendra/lorenanewsapp:latest .
+```
+
+**3. Start the application**
+```bash
+docker-compose up
+```
 
 ---
 
@@ -286,12 +307,14 @@ python manage.py test LorenasGossip.tests.SignalTests --verbosity=2
 
 ## 🛠️ Tech Stack
 
-- **Backend:** Django 5+, Django REST Framework
+- **Backend:** Django 6+, Django REST Framework
 - **Database:** MariaDB
 - **Authentication:** DRF Token Authentication
 - **Email:** Django console email backend (development)
 - **Signals:** Django post_save signals
 - **Frontend:** Bootstrap 5.3
+- **Documentation:** Sphinx with Furo theme
+- **Container:** Docker + Docker Compose
 
 ---
 
@@ -314,7 +337,6 @@ LorenaNewsApp/
 │   ├── urls.py                 # Web URL patterns
 │   ├── api_urls.py             # API URL patterns
 │   └── migrations/
-│       └── 0003_create_groups.py  # Auto-creates groups on migrate
 ├── templates/
 │   ├── base.html
 │   ├── auth/                   # Login, register, password templates
@@ -323,6 +345,7 @@ LorenaNewsApp/
 │   └── publishers/             # Publisher templates
 ├── docs/                       # Sphinx documentation
 ├── Dockerfile                  # Docker configuration
+├── docker-compose.yml          # Docker Compose configuration
 ├── .env                        # Environment variables (not committed)
 ├── .env.example                # Environment template
 ├── requirements.txt
