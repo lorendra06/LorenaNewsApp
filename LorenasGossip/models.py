@@ -17,19 +17,15 @@ class CustomUser(AbstractUser):
     """
     Extended user model with role-based fields.
 
-    Roles:
-    - reader: can view articles/newsletters, subscribe to
-      journalists and publishers.
-    - journalist: can write articles and newsletters,
-      works with multiple publishers.
-    - editor: can approve/delete articles and newsletters,
-      works under a publisher.
-    - publisher: manages a team of journalists and editors.
+    Roles: reader, journalist, editor, publisher.
 
-    Field separation:
-    - Reader fields (subscriptions) are cleared for non-readers.
-    - Journalist/Editor fields (publisher team) are cleared
-      for non-journalists and non-editors.
+    Readers can view articles and subscribe to journalists/publishers.
+    Journalists can write articles and newsletters.
+    Editors can approve and delete articles.
+    Publishers manage a team of journalists and editors.
+
+    Reader fields (subscriptions) are cleared for non-readers.
+    Journalist/Editor fields are cleared for non-journalists/editors.
     """
 
     ROLE_CHOICES = [
