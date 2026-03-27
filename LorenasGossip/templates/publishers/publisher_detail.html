@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ publisher.username }} — Lorena's Gossip{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        <div class="card p-4 mb-4">
+            <h3>🏢 {{ publisher.username }}</h3>
+            <p class="text-muted small">Publisher</p>
+            <hr>
+            <h6>Team</h6>
+            <p class="mb-1">
+                <strong>Journalists:</strong>
+                {{ publisher.journalists.count }}
+            </p>
+            <p>
+                <strong>Editors:</strong>
+                {{ publisher.editors.count }}
+            </p>
+
+            {% if publisher.journalists.all %}
+                <hr>
+                <h6>Journalists</h6>
+                <ul class="list-unstyled">
+                    {% for journalist in publisher.journalists.all %}
+                        <li class="text-muted small">
+                            👤 {{ journalist.username }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            {% if publisher.editors.all %}
+                <hr>
+                <h6>Editors</h6>
+                <ul class="list-unstyled">
+                    {% for editor in publisher.editors.all %}
+                        <li class="text-muted small">
+                            👤 {{ editor.username }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <hr>
+            <!-- Publisher manages their own team -->
+            {% if user == publisher %}
+                <a href="{% url 'publisher_team' publisher.pk %}"
+                    class="btn btn-dark btn-sm w-100 mb-2">
+                    ⚙️ Manage Team
+                </a>
+            {% endif %}
+
+            <!-- Journalist/Editor can join or leave -->
+            {% if user.role == 'journalist' or user.role == 'editor' %}
+                {% if user in publisher.journalists.all or user in publisher.editors.all %}
+                    <a href="{% url 'leave_publisher' publisher.pk %}"
+                        class="btn btn-outline-danger btn-sm w-100">
+                        🚪 Leave Team
+                    </a>
+                {% else %}
+                    <a href="{% url 'join_publisher' publisher.pk %}"
+                        class="btn btn-outline-success btn-sm w-100">
+                        ➕ Join Team
+                    </a>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="col-md-8">
+        <h4 class="mb-3">📰 Published Articles</h4>
+        {% if articles %}
+            {% for article in articles %}
+                <div class="card p-3 mb-3">
+                    <h5>{{ article.title }}</h5>
+                    <p class="text-muted small">
+                        By <strong>{{ article.author.username }}</strong>
+                        · {{ article.created_at|date:"d M Y" }}
+                    </p>
+                    <p>{{ article.content|truncatewords:30 }}</p>
+                    <a href="{% url 'article_detail' article.pk %}"
+                        class="btn btn-outline-dark btn-sm">
+                        Read More
+                    </a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="alert alert-info">
+                No published articles yet.
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<a href="{% url 'publisher_list' %}"
+    class="btn btn-outline-secondary btn-sm mt-2">
+    ← Back to Publishers
+</a>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Join Team — Lorena's Gossip{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <div class="card p-4 text-center">
+            <h3 class="mb-3">➕ Join Team</h3>
+            <p>
+                Are you sure you want to join
+                <strong>{{ publisher.username }}</strong>'s team?
+            </p>
+            <p class="text-muted small">
+                Your articles can then be published under
+                this publisher's name.
+            </p>
+            <form method="post"
+                class="d-flex gap-2 justify-content-center">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-success">
+                    Yes, Join
+                </button>
+                <a href="{% url 'publisher_detail' publisher.pk %}"
+                    class="btn btn-outline-secondary">
+                    Cancel
+                </a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

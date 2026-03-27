@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}Recover Username — Lorena's Gossip{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <div class="card p-4 mt-4">
+            <h2 class="mb-2 text-center">👤 Recover Username</h2>
+            <p class="text-muted text-center mb-4">
+                Enter your email address and we'll show you
+                your username.
+            </p>
+
+            {% if found_username %}
+                <div class="alert alert-success text-center">
+                    ✅ Your username is:
+                    <strong>{{ found_username }}</strong>
+                </div>
+                <a href="{% url 'login' %}" class="btn btn-dark w-100">
+                    Go to Login
+                </a>
+            {% elif not_found %}
+                <div class="alert alert-danger text-center">
+                    ❌ No account found with that email address.
+                </div>
+            {% endif %}
+
+            {% if not found_username %}
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">
+                            Email address
+                        </label>
+                        <input
+                            type="email"
+                            name="email"
+                            class="form-control"
+                            placeholder="your@email.com"
+                            required
+                        >
+                    </div>
+                    <button type="submit" class="btn btn-dark w-100">
+                        Find Username
+                    </button>
+                </form>
+            {% endif %}
+
+            <p class="text-center mt-3">
+                <a href="{% url 'login' %}">← Back to Login</a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete Publisher — Lorena's Gossip{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card p-4 text-center">
+            <h3 class="text-danger mb-3">🗑️ Delete Publisher</h3>
+            <p>Are you sure you want to delete:</p>
+            <p class="fw-bold fs-5">"{{ publisher.name }}"</p>
+            <p class="text-muted">
+                This will NOT delete associated articles,
+                but they will no longer have a publisher.
+            </p>
+            <form method="post"
+                class="d-flex gap-2 justify-content-center">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">
+                    Yes, Delete
+                </button>
+                <a href="{% url 'publisher_list' %}"
+                    class="btn btn-outline-secondary">
+                    Cancel
+                </a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

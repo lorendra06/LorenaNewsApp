@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}Register — Lorena's Gossip{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card p-4 mt-4">
+            <h2 class="mb-4 text-center">📝 Register</h2>
+            <form method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">
+                            {{ field.label }}
+                        </label>
+                        {% if field.field.widget.input_type == 'select' %}
+                            <select
+                                name="{{ field.html_name }}"
+                                class="form-select {% if field.errors %}is-invalid{% endif %}"
+                            >
+                                {% for val, label in field.field.choices %}
+                                    <option value="{{ val }}"
+                                        {% if field.value == val %}selected{% endif %}>
+                                        {{ label }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        {% else %}
+                            <input
+                                type="{{ field.field.widget.input_type }}"
+                                name="{{ field.html_name }}"
+                                class="form-control {% if field.errors %}is-invalid{% endif %}"
+                                {% if field.value %}value="{{ field.value }}"{% endif %}
+                            >
+                        {% endif %}
+
+                        {% if field.errors %}
+                            {% for error in field.errors %}
+                                <div class="invalid-feedback d-block text-danger small">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+                            {% if field.help_text %}
+                                <small class="text-muted">
+                                    {{ field.help_text }}
+                                </small>
+                            {% endif %}
+                        {% endif %}
+
+                    </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-dark w-100">
+                    Create Account
+                </button>
+            </form>
+            <p class="text-center mt-3">
+                Already have an account?
+                <a href="{% url 'login' %}">Login here</a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

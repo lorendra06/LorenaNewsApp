@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Leave Team — Lorena's Gossip{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <div class="card p-4 text-center">
+            <h3 class="text-danger mb-3">🚪 Leave Team</h3>
+            <p>
+                Are you sure you want to leave
+                <strong>{{ publisher.username }}</strong>'s team?
+            </p>
+            <p class="text-muted small">
+                Your existing articles will remain, but you
+                won't be able to publish under this publisher
+                until you rejoin.
+            </p>
+            <form method="post"
+                class="d-flex gap-2 justify-content-center">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">
+                    Yes, Leave
+                </button>
+                <a href="{% url 'publisher_detail' publisher.pk %}"
+                    class="btn btn-outline-secondary">
+                    Cancel
+                </a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

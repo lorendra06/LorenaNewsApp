@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Pending Articles — Lorena's Gossip{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">⏳ Pending Articles</h2>
+
+{% if articles %}
+    <div class="row">
+        {% for article in articles %}
+            <div class="col-md-6 mb-4">
+                <div class="card h-100 p-3 border-warning">
+                    <div class="d-flex justify-content-between">
+                        <h5>{{ article.title }}</h5>
+                        <span class="badge badge-pending">Pending</span>
+                    </div>
+                    <p class="text-muted small">
+                        By <strong>{{ article.author.username }}</strong>
+                        · {{ article.created_at|date:"d M Y" }}
+                    </p>
+                    <p>{{ article.content|truncatewords:25 }}</p>
+                    <div class="mt-auto">
+                        <a href="{% url 'approve_article' article.pk %}"
+                            class="btn btn-success btn-sm">
+                            ✅ Approve
+                        </a>
+                        <a href="{% url 'article_delete' article.pk %}"
+                            class="btn btn-outline-danger btn-sm ms-2">
+                            🗑️ Reject
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="alert alert-success">
+        ✅ No pending articles — all caught up!
+    </div>
+{% endif %}
+{% endblock %}

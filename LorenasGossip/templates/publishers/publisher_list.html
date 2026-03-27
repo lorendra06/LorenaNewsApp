@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Publishers — Lorena's Gossip{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>🏢 Publishers</h2>
+</div>
+
+{% if publishers %}
+    <div class="row">
+        {% for publisher in publishers %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 p-3">
+                    <h5>{{ publisher.username }}</h5>
+                    <p class="text-muted small">
+                        {{ publisher.journalists.count }} journalist(s)
+                        · {{ publisher.editors.count }} editor(s)
+                    </p>
+                    <div class="mt-auto d-flex gap-2 flex-wrap">
+                        <a href="{% url 'publisher_detail' publisher.pk %}"
+                            class="btn btn-outline-dark btn-sm">
+                            View
+                        </a>
+                        {% if user.role == 'journalist' or user.role == 'editor' %}
+                            <a href="{% url 'join_publisher' publisher.pk %}"
+                                class="btn btn-outline-success btn-sm">
+                                ➕ Join
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="alert alert-info">
+        No publishers registered yet.
+    </div>
+{% endif %}
+{% endblock %}

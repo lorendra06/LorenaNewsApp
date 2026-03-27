@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ newsletter.title }} — Lorena's Gossip{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card p-4">
+            <h2>{{ newsletter.title }}</h2>
+            <p class="text-muted">
+                By <strong>{{ newsletter.author.username }}</strong>
+                · {{ newsletter.created_at|date:"d M Y" }}
+            </p>
+            <p>{{ newsletter.description }}</p>
+            <hr>
+            <h5>Articles in this newsletter:</h5>
+            {% if newsletter.articles.all %}
+                <ul class="list-group">
+                    {% for article in newsletter.articles.all %}
+                        <li class="list-group-item">
+                            <a href="{% url 'article_detail' article.pk %}">
+                                {{ article.title }}
+                            </a>
+                            <small class="text-muted ms-2">
+                                by {{ article.author.username }}
+                            </small>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="text-muted">No articles in this newsletter.</p>
+            {% endif %}
+            <div class="mt-3 d-flex gap-2">
+                <a href="{% url 'newsletter_list' %}"
+                    class="btn btn-outline-dark btn-sm">
+                    ← Back
+                </a>
+                {% if user.role == 'editor' or user.role == 'journalist' %}
+                    <a href="{% url 'newsletter_edit' newsletter.pk %}"
+                        class="btn btn-outline-secondary btn-sm">
+                        Edit
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}Newsletters — Lorena's Gossip{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>📋 Newsletters</h2>
+    {% if user.role == 'journalist' %}
+        <a href="{% url 'newsletter_create' %}" class="btn btn-dark">
+            + New Newsletter
+        </a>
+    {% endif %}
+</div>
+
+{% if newsletters %}
+    <div class="row">
+        {% for newsletter in newsletters %}
+            <div class="col-md-6 mb-4">
+                <div class="card h-100 p-3">
+                    <h5>{{ newsletter.title }}</h5>
+                    <p class="text-muted small">
+                        By <strong>{{ newsletter.author.username }}</strong>
+                        · {{ newsletter.created_at|date:"d M Y" }}
+                        · {{ newsletter.articles.count }} article(s)
+                    </p>
+                    <p>{{ newsletter.description|truncatewords:20 }}</p>
+                    <div class="mt-auto d-flex gap-2">
+                        <a href="{% url 'newsletter_detail' newsletter.pk %}"
+                            class="btn btn-outline-dark btn-sm">
+                            View
+                        </a>
+                        {% if user.role == 'editor' or user.role == 'journalist' %}
+                            <a href="{% url 'newsletter_edit' newsletter.pk %}"
+                                class="btn btn-outline-secondary btn-sm">
+                                Edit
+                            </a>
+                            <a href="{% url 'newsletter_delete' newsletter.pk %}"
+                                class="btn btn-outline-danger btn-sm">
+                                Delete
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="alert alert-info">No newsletters yet.</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}Login — Lorena's Gossip{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <div class="card p-4 mt-4">
+            <h2 class="mb-4 text-center">🔐 Login</h2>
+            <form method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">
+                            {{ field.label }}
+                        </label>
+                        <input
+                            type="{{ field.field.widget.input_type }}"
+                            name="{{ field.html_name }}"
+                            class="form-control
+                                {% if field.errors %}is-invalid{% endif %}"
+                            {% if field.value %}value="{{ field.value }}"{% endif %}
+                        >
+                        {% for error in field.errors %}
+                            <div class="invalid-feedback">
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+
+                <button type="submit" class="btn btn-dark w-100 mb-3">
+                    Login
+                </button>
+
+                <!-- Recovery links -->
+                <div class="d-flex justify-content-between">
+                    <a href="{% url 'password_reset' %}"
+                        class="small text-muted">
+                        🔑 Forgot password?
+                    </a>
+                    <a href="{% url 'username_recovery' %}"
+                        class="small text-muted">
+                        👤 Forgot username?
+                    </a>
+                </div>
+
+            </form>
+            <hr>
+            <p class="text-center mt-2 mb-0">
+                Don't have an account?
+                <a href="{% url 'register' %}">Register here</a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

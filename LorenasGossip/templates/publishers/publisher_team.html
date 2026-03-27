@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Manage Team — Lorena's Gossip{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-7">
+        <div class="card p-4">
+            <h2 class="mb-1">⚙️ Manage Team</h2>
+            <p class="text-muted mb-4">
+                Select journalists and editors for
+                <strong>{{ publisher.username }}</strong>'s team.
+            </p>
+            <form method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="mb-4">
+                        <label class="form-label fw-bold">
+                            {{ field.label }}
+                        </label>
+                        {% if field.help_text %}
+                            <p class="text-muted small mb-2">
+                                {{ field.help_text }}
+                            </p>
+                        {% endif %}
+                        {{ field }}
+                        {% for error in field.errors %}
+                            <div class="text-danger small mt-1">
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-dark">
+                        Save Team
+                    </button>
+                    <a href="{% url 'publisher_detail' publisher.pk %}"
+                        class="btn btn-outline-secondary">
+                        Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

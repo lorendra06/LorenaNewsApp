@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}Articles — Lorena's Gossip{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>📰 Latest Articles</h2>
+    {% if user.role == 'journalist' %}
+        <a href="{% url 'article_create' %}" class="btn btn-dark">
+            ✍️ Write Article
+        </a>
+    {% endif %}
+</div>
+
+{% if articles %}
+    <div class="row">
+        {% for article in articles %}
+            <div class="col-md-6 mb-4">
+                <div class="card h-100 p-3">
+                    <h4>{{ article.title }}</h4>
+                    <p class="text-muted small">
+                        By <strong>{{ article.author.username }}</strong>
+                        {% if article.publisher %}
+                            — {{ article.publisher.name }}
+                        {% endif %}
+                        · {{ article.created_at|date:"d M Y" }}
+                    </p>
+                    <p>{{ article.content|truncatewords:30 }}</p>
+                    <div class="mt-auto d-flex gap-2">
+                        <a href="{% url 'article_detail' article.pk %}"
+                            class="btn btn-outline-dark btn-sm">
+                            Read More
+                        </a>
+                        {% if user.role == 'editor' or user.role == 'journalist' %}
+                            <a href="{% url 'article_edit' article.pk %}"
+                                class="btn btn-outline-secondary btn-sm">
+                                Edit
+                            </a>
+                            <a href="{% url 'article_delete' article.pk %}"
+                                class="btn btn-outline-danger btn-sm">
+                                Delete
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="alert alert-info">
+        No approved articles yet.
+        {% if user.role == 'journalist' %}
+            Be the first to
+            <a href="{% url 'article_create' %}">write one!</a>
+        {% endif %}
+    </div>
+{% endif %}
+{% endblock %}
