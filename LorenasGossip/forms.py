@@ -2,6 +2,9 @@
 Forms for the LorenasGossip application.
 Handles registration, article/newsletter creation,
 and publisher team management.
+
+All forms include custom validation methods (clean_*)
+to enforce business rules before saving to the database.
 """
 
 from django import forms
