@@ -2,6 +2,11 @@
 Database models for the LorenasGossip application.
 Defines CustomUser, Article, and Newsletter.
 Publisher is a CustomUser with role='publisher'.
+
+Modules:
+    - CustomUser: Extended user model with role-based access.
+    - Article: News article written by a journalist.
+    - Newsletter: Curated collection of approved articles.
 """
 
 from django.contrib.auth.models import AbstractUser, Group
