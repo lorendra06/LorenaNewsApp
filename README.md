@@ -80,6 +80,42 @@ The application will be available at `http://127.0.0.1:8000/`
 
 ---
 
+## 🐳 Running with Docker
+
+### Prerequisites
+- Docker installed on your machine
+
+### Steps
+
+**1. Create `.env` file** in the root directory (same as above):
+```
+DB_ENGINE=django.db.backends.mysql
+DB_NAME=lorena_news_db
+DB_USER=your_db_user
+DB_PASSWORD=your_db_password
+DB_HOST=your_db_host
+DB_PORT=your_db_port
+SECRET_KEY=your-secret-key
+DEBUG=True
+```
+
+> ⚠️ Never commit your `.env` file to the repository.
+> Use `.env.example` as a reference for the required variables.
+
+**2. Build the Docker image**
+```bash
+docker build -t lorenanewsapp .
+```
+
+**3. Run the container**
+```bash
+docker run -p 8000:8000 --env-file .env lorenanewsapp
+```
+
+The application will be available at `http://localhost:8000/`
+
+---
+
 ## 👥 User Roles
 
 | Role | Permissions |
@@ -285,6 +321,8 @@ LorenaNewsApp/
 │   ├── articles/               # Article templates
 │   ├── newsletters/            # Newsletter templates
 │   └── publishers/             # Publisher templates
+├── docs/                       # Sphinx documentation
+├── Dockerfile                  # Docker configuration
 ├── .env                        # Environment variables (not committed)
 ├── .env.example                # Environment template
 ├── requirements.txt
